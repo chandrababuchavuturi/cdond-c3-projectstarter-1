@@ -128,7 +128,7 @@ jobs:
             aws cloudformation deploy \
             --template-file .circleci/files/frontend.yml \
             --tags project=udapeople \
-            --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
           name: Add back-end ip to ansible inventory
@@ -142,8 +142,8 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      #- destroy-environment:
-       #   workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       
 workflows:
   default:
